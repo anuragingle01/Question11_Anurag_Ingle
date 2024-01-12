@@ -2,22 +2,22 @@ import java.util.Random;
 
 public class Main {
 
-    static PenSaleRecord[] generateSalesData(int days) {
+    static PSRecord[] generateSalesData(int days) {
         Random random = new Random();
-        PenSaleRecord[] salesData = new PenSaleRecord[days];
+        PSRecord[] salesData = new PSRecord[days];
             int price = random.nextInt(11) + 20;       
 
         for (int i = 0; i < days; i++) {
             int unitsSold = random.nextInt(901) + 100; 
             int amount = unitsSold * price;
 
-            salesData[i] = new PenSaleRecord(unitsSold, price, amount);
+            salesData[i] = new PSRecord(unitsSold, price, amount);
         }
 
         return salesData;
     }
 
-    static void analyzeAndPrint(String period, PenSaleRecord[] salesData, int chunkSize) {
+    static void analyzeAndPrint(String period, PSRecord[] salesData, int chunkSize) {
         for (int i = 0; i < salesData.length; i += chunkSize) {
             int totalUnits = 0;
             int totalAmount = 0;
@@ -32,7 +32,7 @@ public class Main {
         }
     }
 
-    static int findMaxAmountQuarter(PenSaleRecord[] salesData, int quarters) {
+    static int maxamtquarter(PSRecord[] salesData, int quarters) {
         int maxAmountQuarter = 1;
         int maxAmount = 0;
 
@@ -52,7 +52,7 @@ public class Main {
         return maxAmountQuarter;
     }
 
-    static int findMaxUnitsQuarter(PenSaleRecord[] salesData, int quarters) {
+    static int maxunitquarter(PSRecord[] salesData, int quarters) {
         int maxUnitsQuarter = 1;
         int maxUnits = 0;
 
@@ -73,7 +73,7 @@ public class Main {
     }
     public static void main(String[] args) {
         int daysInYear = 365;
-        PenSaleRecord[] salesData = generateSalesData(daysInYear);
+        PSRecord[] salesData = generateSalesData(daysInYear);
         
         int monthsInYear = 12;
         int quartersInYear = 4;
@@ -82,19 +82,19 @@ public class Main {
 
         analyzeAndPrint("Quarter", salesData, daysInYear / quartersInYear);
 
-        int maxAmountQuarter = findMaxAmountQuarter(salesData, quartersInYear);
+        int maxAmountQuarter = maxamtquarter(salesData, quartersInYear);
         System.out.println("Quarter with Maximum Sales (Amt): " + maxAmountQuarter);
-        int maxUnitsQuarter = findMaxUnitsQuarter(salesData, quartersInYear);
+        int maxUnitsQuarter = maxunitquarter(salesData, quartersInYear);
         System.out.println("Quarter with Maximum Sales (Units): " + maxUnitsQuarter);
     }
 }
 
-class PenSaleRecord {
+class PSRecord {
     private int unitsSold;
     private int price;
     private int amount;
 
-    public PenSaleRecord(int unitsSold, int price, int amount) {
+    public PSRecord(int unitsSold, int price, int amount) {
         this.unitsSold = unitsSold;
         this.price = price;
         this.amount = amount;
